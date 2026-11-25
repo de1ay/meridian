@@ -22,6 +22,7 @@
 - On the Meridian backend, presentation and billing are initial deployer seeds, not inputs to desired hashes. Server references and their node mapping still belong to the topology.
 
 ## Pitfalls
+- Keep the Xray eligibility cutoff aligned with the HTTPS probe timeout. A lower cutoff can send traffic to BLOCK even when every probe succeeds.
 - **Legacy backends cannot enforce response rules** — refuse nonempty app rules before compilation, including built-in policy choices, since only Meridian's service-settings resources carry them.
 - **Hash grants before resolving them** — service settings carry the core declaration fingerprint; a compiled map changes when protocols or camouflage inbounds change, even when the declared grants do not.
 - **Legacy backends cannot enforce profiles** — refuse named grants or memberships on Remnawave before compiling; only migration uses that backend.

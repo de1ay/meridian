@@ -12,6 +12,10 @@ describes your whole fleet; a small agent on every server applies it; and no
 server needs Docker. The first sections list what changed in each beta,
 newest first; the last is what 4.0 changes compared with 3.x.
 
+### Since 4.0.0b21 (fleet build)
+
+- Xray Automatic accepts successful health probes under three seconds, allowing slower working routes to carry traffic.
+
 ### Since 4.0.0b20
 
 - The CLI now supports Python 3.11–3.15. Installing or upgrading the control service uses a separate Python 3.15 environment on the VPS; the system Python is unchanged. The installer and node agent use refreshed dependencies. Xray stays on 26.7.28 because newer releases omit country lists used by existing routing policies.

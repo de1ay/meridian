@@ -15,6 +15,7 @@ from meridian.core.delivery_policy_ir import ClientRouteAction as ClientRouteAct
 from meridian.core.delivery_policy_ir import client_routes
 from meridian.core.topology import ClientRoutingPolicy, SetupIntent
 
+_XRAY_PROBE_TIMEOUT = "3s"
 _PROBE_URL = "https://www.apple.com/library/test/success.html"
 
 _REGEX_SPECIAL = frozenset("\\.^$|?*+()[]{}")
@@ -75,7 +76,7 @@ def xray_json_template(
                     "strategy": {
                         "type": "leastLoad",
                         "settings": {
-                            "maxRTT": "1s",
+                            "maxRTT": _XRAY_PROBE_TIMEOUT,
                             "expected": 1,
                             "baselines": ["1s"],
                             "tolerance": 0.01,
@@ -92,7 +93,7 @@ def xray_json_template(
                 "connectivity": "",
                 "interval": "1m",
                 "sampling": 1,
-                "timeout": "3s",
+                "timeout": _XRAY_PROBE_TIMEOUT,
             },
         },
         "inbounds": [

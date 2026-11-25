@@ -343,7 +343,13 @@ def _expected(capture: Capture) -> Response:
         + ADDED_HEADERS
     )
     body = golden.body
-    if golden.format == "json":
+    if golden.format == "xray-json":
+        # Remote health checks get the full probe timeout in the fleet build.
+        configs = json.loads(body)
+        for config in configs:
+            config["routing"]["balancers"][0]["strategy"]["settings"]["maxRTT"] = "3s"
+        body = json.dumps(configs)
+    elif golden.format == "json":
         info = json.loads(body)
         if isinstance(info, dict) and info.get("isFound") and "user" in info:
             # Named info extension: directional period counters, volatile like the other traffic fields.
